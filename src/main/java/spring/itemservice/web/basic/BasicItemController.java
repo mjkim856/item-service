@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/basic/items")
 @RequiredArgsConstructor
 public class BasicItemController {
-//test
+
     private final ItemRepository itemRepository;
 
     @GetMapping
@@ -73,6 +73,19 @@ public class BasicItemController {
     public String addItem4(Item item) {
         itemRepository.save(item);
         return "basic/item";
+    }
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findByID(itemId);
+        model.addAttribute("item", item);
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
     }
 
     /**
