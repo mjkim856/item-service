@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/basic/items")
 @RequiredArgsConstructor
 public class BasicItemController {
-
+//test
     private final ItemRepository itemRepository;
 
     @GetMapping
